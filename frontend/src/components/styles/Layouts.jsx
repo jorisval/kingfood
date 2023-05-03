@@ -427,7 +427,7 @@ const LayoutsStyle = createGlobalStyle`
                 }
                 form {
                     display: flex;
-                    width: 80%;
+                    width: 90%;
                     margin: auto;
                     margin-top: 0.9375rem;
                     margin-bottom: 0.9375rem;
@@ -437,21 +437,24 @@ const LayoutsStyle = createGlobalStyle`
                     font-size: 0.875rem;
                     color: ${theme.colors.paragraph};
                     padding: 0.25rem 0.5rem;
-                    border: 1px ${theme.colors.paragraph} solid;
-                    border-radius: 2rem 0 0 2rem;
+                    border: 1px ${theme.colors.secondary} solid;
+                    border-radius: 5px 0 0 5px;
                     width: 65%;
     
                     @media (min-width: ${theme.breakpoints.up.medium}) {
                         padding: 0.5rem 1rem;
                         font-size: 1rem;
                     }
+                    &:focus {
+                        outline: none;
+                    }
                 }
     
                 button[type="submit"] {;
                     background-color: ${theme.colors.secondary};
                     padding: 0.25rem 0.5rem;
-                    border: 1px ${theme.colors.paragraph} solid;
-                    border-radius: 0 2rem 2rem 0;
+                    border: 1px ${theme.colors.secondary} solid;
+                    border-radius: 0 5px 5px 0;
                     margin-left: -5px;
     
                     @media (min-width: ${theme.breakpoints.up.medium}) {
@@ -530,9 +533,65 @@ const LayoutsStyle = createGlobalStyle`
         padding-bottom: 1.25rem;
         margin: 0 -0.5rem;
         margin-top: ${theme.layout.spaceBetween90};
-        color: ${theme.colors.paragraph};
-        border-top: 1px rgba(12, 82, 89, 0.20) solid;
-        background-color: ${theme.colors.backgroundColor2};
+        color: ${theme.colors.white};
+        border-top: 1px #1E1D23 solid;
+        background-color: #1E1D23;
+
+        .newsletter {
+            margin-bottom: ${theme.layout.spaceBetween10};
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            h3 {
+                font-family: ${theme.typography.secondaryFontFamily};
+                color: ${theme.colors.white};
+            }
+            form {
+                display: flex;
+                width: 100%;
+                @media (min-width: ${theme.breakpoints.up.medium}) {
+                    width: 40%;
+                    height: fit-content;
+                }
+            }
+
+            input[type="email"] {
+                font-family: ${theme.typography.primaryFontFamily};
+                font-size: 0.875rem;
+                color: ${theme.colors.white};
+                padding: 0.25rem 0.5rem;
+                border: 1px ${theme.colors.secondary} solid;
+                border-radius: 5px 0 0 5px;
+                width: 65%;
+                background-color: #1E1D23;
+
+                @media (min-width: ${theme.breakpoints.up.medium}) {
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            input[type="submit"] {
+                font-family: ${theme.typography.primaryFontFamily};
+                font-size: 0.875rem;
+                color: ${theme.colors.white};
+                background-color: ${theme.colors.secondary};
+                padding: 0.25rem 0.5rem;
+                border: 1px ${theme.colors.secondary} solid;
+                border-radius: 0 5px 5px 0;
+                margin-left: -5px;
+
+                @media (min-width: ${theme.breakpoints.up.medium}) {
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
+                }
+            }
+        }
 
         &__part-1 {
             display: flex;
@@ -547,15 +606,22 @@ const LayoutsStyle = createGlobalStyle`
                 margin-bottom: ${theme.layout.spaceBetween90};
             }
 
-            div {
+            & > div {
                 padding: 1rem;
+                width: 10rem;
             }
 
             h3 {
-                font-size: 1.125rem;
-                color: ${theme.colors.titleH3};
+                font-size: 1rem;
+                color: ${theme.colors.white};
                 font-weight: 500;
                 margin-bottom: 0.625rem;
+            }
+            p {
+                font-size: 0.875rem;
+                color: ${theme.colors.backgroundColor2};
+                font-weight: 200;
+                line-height: 18px;
             }
 
             ul {
@@ -565,58 +631,112 @@ const LayoutsStyle = createGlobalStyle`
             li {
                 list-style-type: none;
                 margin: 0.25rem 0;
+                i {
+                    font-size: 0.875rem;
+                    font-weight: 300;
+                    font-style: normal;
+                    color: ${theme.colors.white};
+                }
             }
 
             a {
                 text-decoration: none;
-                color: ${theme.colors.paragraph};
-
+                font-size: 0.875rem;
+                color: ${theme.colors.backgroundColor2};
+                font-weight: 200;
                 &:hover {
                     color: ${theme.colors.secondary};
                 }
             }
-
-            form {
-                display: flex;
-                width: 100%;
+            .more {
+                width: 12.5rem;
             }
-
-            input[type="email"] {
-                font-size: 0.875rem;
-                color: ${theme.colors.paragraph};
-                padding: 0.25rem 0.5rem;
-                border: 2px ${theme.colors.button} solid;
-                border-radius: 2rem 0 0 2rem;
-                width: 65%;
-
-                @media (min-width: ${theme.breakpoints.up.medium}) {
-                    padding: 0.5rem 1rem;
-                    font-size: 1rem;
+            .more-two {
+                display: flex;
+                align-items: center;
+                .calendar-div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    margin-right: 5px;
+                    padding: 1rem;
+                    background-color: ${theme.colors.secondary};
+                    .bi-calendar2 {
+                        font-size: 1.5rem;
+                    }
+                }
+                h4 {
+                    font-size: 0.875rem;
+                    margin: 0;
+                    margin-bottom: 5px;
+                }
+                p {
+                    margin: 0;
                 }
             }
-
-            input[type="submit"] {
-                font-size: 0.875rem;
-                color: ${theme.colors.white};
-                background-color: ${theme.colors.button};
-                padding: 0.25rem 0.5rem;
-                border: 2px ${theme.colors.button} solid;
-                border-radius: 0 2rem 2rem 0;
-                margin-left: -5px;
-
-                @media (min-width: ${theme.breakpoints.up.medium}) {
-                    padding: 0.5rem 1rem;
-                    font-size: 1rem;
+            .recent-blog {
+                width: 12.5rem;
+                &__post a {
+                    display: flex;
+                    align-items: flex-start;
+                    text-decoration: none;
+                    margin-bottom: 1rem;
+                    .post-image {
+                        width: 4.875rem;
+                        height: 4.875rem;
+                        margin-right: 5px;
+                        img {
+                            width: 100%;
+                            border-radius: 5px;
+                        }
+                    }
+                    p {
+                        font-weight: 300;
+                        color: ${theme.colors.white};
+                        margin: 0;
+                        margin-bottom: 5px;
+                    }
+                    span {
+                        font-size: 0.625rem;
+                        color: ${theme.colors.backgroundColor2};
+                        font-weight: 200;
+                    }
                 }
             }
         }
 
         &__part-2 {
-            font-size: 1rem;
-
-            p {
-                margin: 0;
-            } 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .footer {
+                &-logo {
+                    margin-bottom: 1rem;
+                    @media (min-width: ${theme.breakpoints.up.medium}) {
+                        margin-bottom: 0;
+                    }
+                }
+                &-copyright {
+                    @media (min-width: ${theme.breakpoints.up.medium}) {
+                        width: 60%;
+                        text-align: left;
+                    }
+                    p {
+                        font-size: 0.875rem;
+                        color: ${theme.colors.backgroundColor2};
+                        font-weight: 200;
+                        line-height: 18px;
+                        margin: 0;
+                    } 
+                }
+            }
         }
     }
 `;

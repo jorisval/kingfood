@@ -31,11 +31,11 @@ function MenuMd() {
             <div className="menu-md__hide">
                 <nav>
                     <ul className="">
-                        <li className={ activePage === "home" ? "active" : "" }><Link to="/" onClick={handleMenuMdLink}>Home</Link></li>
-                        <li className={ activePage === "faq" ? "active" : "" }><Link to="/faq" onClick={handleMenuMdLink}>About us</Link></li>
-                        <li className={ activePage === "catalog" ? "active" : "" }><Link to="/catalog" onClick={handleMenuMdLink}>Catalogue</Link></li>
-                        <li className={ activePage === "blog" ? "active" : "" }><Link to="/blog" onClick={handleMenuMdLink}>Blog</Link></li>
-                        <li className={ activePage === "contact" ? "active" : "" }><Link to="/contact" onClick={handleMenuMdLink}>Contact us</Link></li>
+                        <li className={ activePage === "home" ? "active" : "" }><Link to="/" onClick={handleMenuMdLink}>HOME</Link></li>
+                        <li className={ activePage === "faq" ? "active" : "" }><Link to="/faq" onClick={handleMenuMdLink}>ABOUT</Link></li>
+                        <li className={ activePage === "catalog" ? "active" : "" }><Link to="/catalog" onClick={handleMenuMdLink}>SHOP</Link></li>
+                        <li className={ activePage === "blog" ? "active" : "" }><Link to="/blog" onClick={handleMenuMdLink}>BLOG</Link></li>
+                        <li className={ activePage === "contact" ? "active" : "" }><Link to="/contact" onClick={handleMenuMdLink}>CONTACT</Link></li>
                     </ul>
                 </nav>
             </div>
