@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import theme from '../utils/Variables';
+import HeroBackground from "../../assets/images/hero-background-image.png";
 
 const fadeIn = keyframes`
   0% {
@@ -15,37 +16,36 @@ animation: ${fadeIn} 1s ease-in;
 .hero {
     display: flex;
     flex-direction: column;
-    background-color: ${theme.colors.backgroundColor1};
+    justify-content: center;
+    background: url(${HeroBackground}) center center / cover;
+    
     margin: 0 -0.5rem;
-    @media (min-width: ${theme.breakpoints.up.large}) {
+    @media (min-width: ${theme.breakpoints.up.medium}) {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         margin: 0 -8px;
-        padding-right: ${theme.layout.spaceBetween60};
-        padding-bottom: ${theme.layout.spaceBetween90};
     }
-    &__text {
-        border-radius: 0.5rem;
+    &__text {  
         padding: 0.5rem;
         z-index: 2;
         width: 80%;
         margin: auto;
         text-align: center;
-        @media (min-width: ${theme.breakpoints.up.large}) {
-            padding-top: 8.75rem;
+        @media (min-width: ${theme.breakpoints.up.medium}) {
             margin: 0 0 0 ${theme.layout.marginLeftRight};
             width: 40%;
             max-width: 33rem;
             text-align: unset;
-            border-radius: 0;
         }
         h1 {
+            font-family: ${theme.typography.secondaryFontFamily};
             color: ${theme.colors.white};
-            font-size: 1.5rem;
+            font-size: 2rem;
             line-height: 2rem;
-            margin-bottom: ${theme.layout.spaceBetween30};
-            @media (min-width: ${theme.breakpoints.up.large}) {
-                font-size: 2.375rem;
+            margin-bottom: ${theme.layout.spaceBetween10};
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                font-size: 3.125rem;
                 line-height: 3.2rem;
                 text-align: left;
             }
@@ -54,46 +54,24 @@ animation: ${fadeIn} 1s ease-in;
             color: ${theme.colors.white};
             font-size: 1rem;
             line-height: 1.625rem;
-            font-weight: 200;
+            font-weight: 700;
             margin-bottom: ${theme.layout.spaceBetween30};
-            @media (min-width: ${theme.breakpoints.up.large}) {
+            @media (min-width: ${theme.breakpoints.up.medium}) {
                 text-align: left;
+                margin-bottom: 0;
+            }
+            span {
+                color: ${theme.colors.secondary};
             }
         }
-        .cta-row {
-            display: flex;
-            justify-content: center;
-            @media (min-width: ${theme.breakpoints.up.large}) {
-                justify-content: left;
-            }
-            .cta-button {
-                margin-right: 0.9375rem;
-                color: ${theme.colors.white};
-                background-color: ${theme.colors.transparent};
-                border: 2px solid ${theme.colors.white};
-                font-weight: 300;
-                &.view {
-                    color: ${theme.colors.button};
-                    background-color: ${theme.colors.secondary};
-                    border: 2px solid ${theme.colors.secondary};
-                }
-                :hover {
-                    color: ${theme.colors.white};
-                    background-color: ${theme.colors.button};
-                    border: 2px solid ${theme.colors.button};
-                }
-            }
-        }
-
     }
     &__image {
         margin: auto;
+        margin-bottom: -4px;
+        max-width: 90%;
         @media (min-width: ${theme.breakpoints.up.medium}) {
-            max-width: 60%;
-        }
-        @media (min-width: ${theme.breakpoints.up.large}) {
+
             max-width: 50%;
-            padding-top: 8.75rem;
             margin: none;
         }
         img {

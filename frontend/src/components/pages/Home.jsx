@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 //import CatalogView from "../layout/catalog-view";
 import { HeaderContext } from "../utils/context";
-//import Hero from "../../assets/images/hero_image.png";
+import Hero from "../../assets/images/k-hero-image.png";
 //import BeneFirst from "../../assets/images/benefits1-large.png";
 //import BeneSecond from "../../assets/images/benefits2-large.png";
 //import PostImage1 from "../../assets/images/nordic.png";
@@ -17,20 +17,16 @@ function Home() {
         setActivePage('home');
     }, [setActivePage]);
     return(
-        <HomeContainer className="home">{/*
+        <HomeContainer className="home">
             <div className="hero">
                 <div className="hero__text">
-                    <h1>Modern Interior Design Studio</h1>
-                    <p className="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="cta-row">
-                        <Link to='#catalogView' className="cta-button view">Shop Now</Link>
-                        <Link to='/catalog' className="cta-button">Explore</Link>
-                    </div>
+                    <h1>RECIPE MENU</h1>
+                    <p className="subtitle">HOME <span>/ RECIPE MENU</span></p>
                 </div>
                 <div className="hero__image">
                     <img src={Hero} alt=""/>
                 </div>
-            </div>
+            </div>{/*
             <CatalogView id="catalogView"/>
             <div className="benefits-one">
                 <div className="benefits-one__image">
