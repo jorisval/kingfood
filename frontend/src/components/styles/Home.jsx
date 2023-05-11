@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import theme from '../utils/Variables';
-import HeroBackground from "../../assets/images/hero-background-image.png";
+import HeroBackground from "../../assets/images/hero-background-image.png"
+import SectionOneImage from "../../assets/images/section-one-image.png";
 
 const fadeIn = keyframes`
   0% {
@@ -80,69 +81,129 @@ animation: ${fadeIn} 1s ease-in;
     }
 
 }
-.benefits-one {
-    margin: 0 ${theme.layout.marginLeftRight};
+.section-one {
+    margin: 0 -0.5rem;
     margin-top: ${theme.layout.spaceBetween90};
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    @media (min-width: ${theme.breakpoints.up.medium}) {
-        flex-direction: row-reverse;
-        align-items: center;
+    position: relative;
+    background: url(${SectionOneImage}) center center / cover;
+    @media (min-width: ${theme.breakpoints.up.large}) {
+        background: unset;
+        background-color: ${theme.colors.backgroundColor1};
     }
     &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 7;
         width: 100%;
-        margin-bottom: ${theme.layout.spaceBetween20};
-        @media (min-width: ${theme.breakpoints.up.medium}) {
-            width: 35%;
-            max-width: 43.75rem;
-        }
-        img {
-            width: 100%;
+        height: 100%;
+        background-color: rgba(20, 20, 20, 0.9);
+        @media (min-width: ${theme.breakpoints.up.large}) {
+            background: url(${SectionOneImage}) center center / cover;
+            width: 50%;
+            left: unset;
+            right: 0;
         }
     }
     &__text {
-        text-align: left;
-        @media (min-width: ${theme.breakpoints.up.medium}) {
-            width: 60%;
-            max-width: 41.25rem;
+        z-index: 8;
+        box-sizing: border-box;
+        text-align: center;
+        padding: ${theme.layout.marginLeftRight};
+        @media (min-width: ${theme.breakpoints.up.large}) {
+            width: 50%;
+            padding: ${theme.layout.spaceBetween90};
         }
-        p {
-            color: ${theme.colors.paragraph};
-            font-size: 1rem;
-            line-height: 1.625rem;
-            margin-bottom: ${theme.layout.spaceBetween20};
+        .subtitle {
+            font-family: ${theme.typography.tertiaryFontFamily};
+            font-size: 1.25rem;
+            color: ${theme.colors.secondary};
+            margin-bottom: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                font-size: 1.875rem;
+                margin-bottom: 1.875rem;
+            }
         }
-        .four-benefits {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            div {
-                width: 48%;
-                margin-top: 1rem;
-                @media (min-width: ${theme.breakpoints.up.medium}) {
-                    width: 40%;
-                }
-                span {
-                    font-size: 1.5rem;
-                }
+        h2 {
+            font-family: ${theme.typography.secondaryFontFamily};
+            font-size: 1.75rem;
+            color: ${theme.colors.white};
+            margin-top: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                margin-top: 1.875rem;
+                font-size: 2.5rem;
+            }
+        }
+        .coma {
+            img {
+                max-width: 15px;
+                margin-right: 0.5rem;
+            }
+        }
+        .Customer {
+            &-reviews {
+                width: 70%;
+                margin: auto;
+            }
+            &-review {
+                display: none;
+                animation: ${fadeIn} 0.5s ease-in;
+                margin-bottom: ${theme.layout.spaceBetween30};
                 p {
-                    margin-top: 0;
+                    color: ${theme.colors.paragraph};
+                    font-size: 1rem;
+                    line-height: 1.625rem;
+                    margin-bottom: ${theme.layout.spaceBetween20};
                 }
-                h4 {
+                &__image {
+                    max-width: 60px;
+                    margin-bottom: ${theme.layout.spaceBetween10};
+                    border-radius: 5px;
+                }
+                &__name {
+                    color: ${theme.colors.white};
+                    font-size: 1rem;
                     font-weight: 400;
-                    margin: 0.5rem 0;
+                    margin-bottom: ${theme.layout.spaceBetween10};
+                }
+                &__post {
+                    color: ${theme.colors.link};
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin-bottom: ${theme.layout.spaceBetween10};
+                }
+                &.active {
+                    display: block;
+                }
+            }
+        }
+        .review {
+            &-circles {
+                display: flex;
+                justify-content: center;
+            }
+            &-circle {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: ${theme.colors.paragraph};
+                margin-right: 4px;
+
+                &.active {
+                    background-color: ${theme.colors.secondary};
                 }
             }
         }
     }
 }
-.benefits-two {
+.section-two {
     margin: 0 ${theme.layout.marginLeftRight};
     margin-top: ${theme.layout.spaceBetween90};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: ${theme.colors.backgroundColor1};
     @media (min-width: ${theme.breakpoints.up.medium}) {
         flex-direction: row;
         align-items: center;
@@ -170,7 +231,7 @@ animation: ${fadeIn} 1s ease-in;
             line-height: 1.625rem;
             margin-bottom: ${theme.layout.spaceBetween20};
         }
-        .four-benefits {
+        .four-section {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;

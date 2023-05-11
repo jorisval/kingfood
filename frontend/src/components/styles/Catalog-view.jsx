@@ -40,16 +40,27 @@ export const CatalogViewContainer = styled.div`
         margin-bottom: 2.1875rem;
         .subtitle {
             font-family: ${theme.typography.tertiaryFontFamily};
-            font-size: 1.875rem;
+            font-size: 1.25rem;
             color: ${theme.colors.secondary};
+            margin-bottom: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                font-size: 1.875rem;
+                margin-bottom: 1.875rem;
+            }
         }
         h2 {
             font-family: ${theme.typography.secondaryFontFamily};
-            font-size: 2.5rem;
+            font-size: 1.75rem;
+            margin-top: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                margin-top: 1.875rem;
+                font-size: 2.5rem;
+            }
         }
         .category-buttons {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             .cta-button {
                 background-color: ${theme.colors.white};
                 border-radius: 10px;
