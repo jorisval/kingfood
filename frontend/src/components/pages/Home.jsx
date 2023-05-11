@@ -8,15 +8,21 @@ import Coma from "../../assets/images/section-one-coma.png";
 //import PostImage1 from "../../assets/images/nordic.png";
 //import PostImage2 from "../../assets/images/kruzo.png";
 //import PostImage3 from "../../assets/images/ergonomic.png";
-//import { Link } from "react-router-dom";
 import { HomeContainer } from "../styles/Home";
 
 
 function Home() {
     const { setActivePage } = useContext(HeaderContext);
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const currentTime = `${hours}:${minutes}`;
     useEffect(() => {
         setActivePage('home');
     }, [setActivePage]);
+    async function handleBookingSubmit(event) {
+        event.preventDefault();
+    }
     return(
         <HomeContainer className="home">
             <div className="hero">
@@ -84,36 +90,33 @@ function Home() {
                         </div>
                     </div>
                 </div>
-            </div>{/*
+            </div>
             <div className="section-two">
                 <div className="section-two__image">
-                    <img src={BeneSecond} alt=""/>
                 </div>
                 <div className="section-two__text">
-                    <h2>We Help You Make Modern Interior Design</h2>
-                    <p>Recherche de produits, recherche de marchés inexploités, copywriting, boutique shopify, 
-                        vidéos pour Facebook ads et Tiktok ads etc... Nous nous occupons de tout pour vous.</p>
-                    <div className="four-section">
-                        <div className="four-section__first">
-                            <span className="bi bi-check2-circle"></span>
-                            <p>Recherche produits, recherche de marchés</p>
-                        </div>
-                        <div className="four-section__second">
-                            <span className="bi bi-check2-circle"></span>
-                            <p>Recherche produits, recherche de marchés</p>
-                        </div>
-                        <div className="four-section__third">
-                            <span className="bi bi-check2-circle"></span>
-                            <p>Recherche produits, recherche de marchés</p>
-                        </div>
-                        <div className="four-section__fourth">
-                            <span className="bi bi-check2-circle"></span>
-                            <p>Recherche produits, recherche de marchés</p>
-                        </div>
+                <p className="subtitle">Reservation</p>
+                    <h2>BOOK A TABLE NOW !</h2>
+                    <div className="booking-section">
+                        <form onSubmit={handleBookingSubmit}>
+                            <div>
+                                <select name="person" id="person">
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 Person</option>
+                                    <option value="3">3 Person</option>
+                                    <option value="4">4 Person</option>
+                                    <option value="5">5 Person</option>
+                                    <option value="6">6 Person</option>
+                                </select>
+                            </div>
+                            <div><input type="email" name="email" id="email" placeholder="Email"/></div>
+                            <div><input type="time" name="time" id="time" defaultValue={currentTime}/></div>
+                            <div><textarea name="message" id="message" rows="6" placeholder="Message"></textarea></div>
+                            <div><input type="submit" value="RESERVE NOW" className="cta-button"/></div>
+                        </form>
                     </div>
-                    <Link to='/catalog' className="cta-button">Explore</Link>
                 </div>
-            </div>
+            </div>{/*
             <div className="blog">
                 <div className="blog__posts">
                     <div className="blog__post">

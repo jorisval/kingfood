@@ -9,7 +9,7 @@ const ComponentsStyle = createGlobalStyle`
         color: ${theme.colors.white};
         padding: 0.625rem 1.75rem;
         background-color: ${theme.colors.button};
-        border-radius: 2rem;
+        border-radius: 5px;
         border-style: none;
         display: inline-block;
         cursor: pointer;
@@ -26,7 +26,7 @@ const ComponentsStyle = createGlobalStyle`
         color: ${theme.colors.white};
         padding: 0.5rem 1.5rem;
         background-color: ${theme.colors.button};
-        border-radius: 2rem;
+        border-radius: 5px;
         border-style: none;
         display: inline-block;
         margin-bottom: ${theme.layout.spaceBetween30};
@@ -44,7 +44,7 @@ const ComponentsStyle = createGlobalStyle`
         color: ${theme.colors.white};
         padding: 0.625rem 1.75rem;
         background-color: ${theme.colors.primary};
-        border-radius: 2rem;
+        border-radius: 5px;
         border-style: none;
         display: inline-block;
         cursor: pointer;

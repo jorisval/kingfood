@@ -2,6 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import theme from '../utils/Variables';
 import HeroBackground from "../../assets/images/hero-background-image.png"
 import SectionOneImage from "../../assets/images/section-one-image.png";
+import SectionTwoImage from "../../assets/images/section-two-image.png";
 
 const fadeIn = keyframes`
   0% {
@@ -107,6 +108,7 @@ animation: ${fadeIn} 1s ease-in;
         }
     }
     &__text {
+        width: 100%;
         z-index: 8;
         box-sizing: border-box;
         text-align: center;
@@ -198,54 +200,103 @@ animation: ${fadeIn} 1s ease-in;
     }
 }
 .section-two {
-    margin: 0 ${theme.layout.marginLeftRight};
-    margin-top: ${theme.layout.spaceBetween90};
+    margin: 0 -0.5rem;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: ${theme.colors.backgroundColor1};
-    @media (min-width: ${theme.breakpoints.up.medium}) {
-        flex-direction: row;
-        align-items: center;
+    position: relative;
+    background: url(${SectionTwoImage}) center center / cover;
+    @media (min-width: ${theme.breakpoints.up.large}) {
+        background: unset;
+        background-color: ${theme.colors.backgroundColor1};
+        flex-direction: row-reverse;
     }
     &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
         width: 100%;
-        margin-bottom: ${theme.layout.spaceBetween20};
-        @media (min-width: ${theme.breakpoints.up.medium}) {
-            width: 60%;
-            max-width: 43.75rem;
-        }
-        img {
-            width: 100%;
+        height: 100%;
+        background-color: rgba(20, 20, 20, 0.9);
+        @media (min-width: ${theme.breakpoints.up.large}) {
+            background: url(${SectionTwoImage}) center center / cover;
+            width: 50%;
         }
     }
     &__text {
-        text-align: left;
-        @media (min-width: ${theme.breakpoints.up.medium}) {
-            width: 35%;
-            max-width: 41.25rem;
+        width: 100%;
+        z-index: 10;
+        box-sizing: border-box;
+        text-align: center;
+        padding: ${theme.layout.marginLeftRight};
+        @media (min-width: ${theme.breakpoints.up.large}) {
+            width: 50%;
+            padding: ${theme.layout.spaceBetween90};
         }
-        p {
-            color: ${theme.colors.paragraph};
-            font-size: 1rem;
-            line-height: 1.625rem;
-            margin-bottom: ${theme.layout.spaceBetween20};
+        .subtitle {
+            font-family: ${theme.typography.tertiaryFontFamily};
+            font-size: 1.25rem;
+            color: ${theme.colors.secondary};
+            margin-bottom: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                font-size: 1.875rem;
+                margin-bottom: 1.875rem;
+            }
         }
-        .four-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            div {
+        h2 {
+            font-family: ${theme.typography.secondaryFontFamily};
+            font-size: 1.75rem;
+            color: ${theme.colors.white};
+            margin-top: 1rem;
+            @media (min-width: ${theme.breakpoints.up.medium}) {
+                margin-top: 1.875rem;
+                font-size: 2.5rem;
+            }
+        }
+        .booking-section {
+            margin: auto;
+            width: 80%;
+            form {
                 display: flex;
-                width: 48%;
-                margin: 1.25rem 0;
-                span {
-                    font-size: 1rem;
-                    margin-top: 0.25rem;
+                flex-direction: column;
+                width: 100%;
+                div {
+                    width: 100%;
                 }
-                p {
-                    margin: 0;
-                    margin-left: 0.5rem;
+                select, input, textarea {
+                    box-sizing: border-box;
+                    font-family: ${theme.typography.primaryFontFamily};
+                    font-size: 0.9375rem;
+                    line-height: 1.375rem;
+                    font-weight: 400;
+                    color: ${theme.colors.paragraph};
+                    background-color: ${theme.colors.transparent};
+                    width: 100%;
+                    border: 1px ${theme.colors.paragraph} solid;
+                    padding: ${theme.layout.spaceBetween10};
+                    margin-bottom: ${theme.layout.spaceBetween20};
+                    @media (min-width: ${theme.breakpoints.up.medium}) {
+                        font-size: 1rem;
+                    }
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                input[type="submit"] {
+                    font-family: ${theme.typography.primaryFontFamily};
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    color: ${theme.colors.white};
+                    padding: 0.375rem 1.625rem;
+                    background-color: ${theme.colors.link};
+                    width: unset;
+                    border-radius: 5px;
+                    border-style: none;
+                    display: inline-block;
+                    cursor: pointer;
+                    @media (min-width: ${theme.breakpoints.up.medium}) {
+                        font-size: 1rem;
+                        padding: 0.55rem 2.18rem;
+                    }
                 }
             }
         }
