@@ -7,6 +7,13 @@ import Coma from "../../assets/images/section-one-coma.png";
 import StaffImage1 from "../../assets/images/staff-1.png";
 import StaffImage2 from "../../assets/images/staff-2.png";
 import StaffImage3 from "../../assets/images/staff-3.png";
+import Trust1 from "../../assets/images/trust-1.png";
+import Trust2 from "../../assets/images/trust-2.png";
+import Trust3 from "../../assets/images/trust-3.png";
+import Trust4 from "../../assets/images/trust-4.png";
+import Trust5 from "../../assets/images/trust-5.png";
+import Trust6 from "../../assets/images/trust-6.png";
+import Trust7 from "../../assets/images/trust-7.png";
 import { HomeContainer } from "../styles/Home";
 import { Link } from "react-router-dom";
 
@@ -173,6 +180,26 @@ function Home() {
                             <Link to=""><span className="bi bi-linkedin"></span></Link>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="trust-section">
+                <div className="trust-images">
+                    <img src={Trust1} alt="" />
+                    <img src={Trust2} alt="" />
+                    <img src={Trust3} alt="" />
+                    <img src={Trust4} alt="" />
+                    <img src={Trust5} alt="" />
+                    <img src={Trust6} alt="" />
+                    <img src={Trust7} alt="" />
+                </div>
+                <div className="trust-images">
+                    <img src={Trust1} alt="" />
+                    <img src={Trust2} alt="" />
+                    <img src={Trust3} alt="" />
+                    <img src={Trust4} alt="" />
+                    <img src={Trust5} alt="" />
+                    <img src={Trust6} alt="" />
+                    <img src={Trust7} alt="" />
                 </div>
             </div>
         </HomeContainer>

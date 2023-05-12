@@ -13,6 +13,16 @@ const fadeIn = keyframes`
   }
 `;
 
+const scroll = keyframes`
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+`;
+
+
 export const HomeContainer = styled.div`
 animation: ${fadeIn} 1s ease-in;
 .hero {
@@ -401,6 +411,29 @@ animation: ${fadeIn} 1s ease-in;
                 text-decoration: none;
                 color: ${theme.colors.titleH2};
             }
+        }
+    }
+}
+.trust {
+    &-section {
+        margin: 0 -0.5rem;
+        margin-top: ${theme.layout.spaceBetween90};
+        margin-bottom: -${theme.layout.spaceBetween90};
+        display: flex;
+        background-color: ${theme.colors.white};
+        overflow: hidden;
+    }
+    &-images {
+        display: flex;
+        height: 40px;
+        margin 1.875rem 3.125rem;
+        animation: ${scroll} 60s linear infinite;
+        @media (min-width: ${theme.breakpoints.up.medium}) {
+            height: 60px;
+        }
+        img {
+            height: 100%;
+            margin-right: 2rem;
         }
     }
 }
