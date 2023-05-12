@@ -1,14 +1,14 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import CatalogView from "../layout/catalog-view";
 import { HeaderContext } from "../utils/context";
 import Hero from "../../assets/images/k-hero-image.png";
 import CustomerImage1 from "../../assets/images/customer-image.png";
 import Coma from "../../assets/images/section-one-coma.png";
-//import BeneSecond from "../../assets/images/section2-large.png";
-//import PostImage1 from "../../assets/images/nordic.png";
-//import PostImage2 from "../../assets/images/kruzo.png";
-//import PostImage3 from "../../assets/images/ergonomic.png";
+import StaffImage1 from "../../assets/images/staff-1.png";
+import StaffImage2 from "../../assets/images/staff-2.png";
+import StaffImage3 from "../../assets/images/staff-3.png";
 import { HomeContainer } from "../styles/Home";
+import { Link } from "react-router-dom";
 
 
 function Home() {
@@ -95,7 +95,7 @@ function Home() {
                 <div className="section-two__image">
                 </div>
                 <div className="section-two__text">
-                <p className="subtitle">Reservation</p>
+                    <p className="subtitle">Reservation</p>
                     <h2>BOOK A TABLE NOW !</h2>
                     <div className="booking-section">
                         <form onSubmit={handleBookingSubmit}>
@@ -116,41 +116,65 @@ function Home() {
                         </form>
                     </div>
                 </div>
-            </div>{/*
-            <div className="blog">
-                <div className="blog__posts">
-                    <div className="blog__post">
+            </div>
+            <div className="staff">
+                <div className="staff-header">
+                    <div className="staff-header__part1">
+                        <p className="subtitle">Our Professional</p>
+                        <h2>MEET OUR STAFF</h2>
+                    </div>
+                    <div className="staff-header__part2">
+                        <Link to='/faq' className="cta-button">VIEW ALL STAFF</Link>
+                    </div>
+                </div>
+                <div className="staff-members">
+                    <div className="staff-member">
                         <div className="image">
-                            <img src={PostImage1} alt=""/>
+                            <img src={StaffImage1} alt=""/>
                         </div>
-                        <div>
-                        <h4>Nordic Chair</h4>
-                        <p>Nous maîtrisons les meilleurs process et les meilleures stratégies des tops du domaine</p>
-                            <Link to='/blog'>Read more</Link>
+                        <div className="infos">
+                            <div className="staff-member__name">RASALINA DE</div>
+                            <div className="staff-member__experience">12 YEARS EXPERIENCE</div>
                         </div>
-                    </div>
-                    <div className="blog__post">
-                    <div className="image">
-                            <img src={PostImage2} alt=""/>
-                        </div>
-                        <div>
-                            <h4>Kurozo Aero Chair</h4>
-                        <p>Nous maîtrisons les meilleurs process et les meilleures stratégies des tops du domaine</p>
-                            <Link to='/blog'>Read more</Link>
+                        <div className="media">
+                            <Link to=""><span className="bi bi-facebook"></span></Link>
+                            <Link to=""><span className="bi bi-twitter"></span></Link>
+                            <Link to=""><span className="bi bi-pinterest"></span></Link>
+                            <Link to=""><span className="bi bi-linkedin"></span></Link>
                         </div>
                     </div>
-                    <div className="blog__post">
-                    <div className="image">
-                            <img src={PostImage3} alt=""/>
+                    <div className="staff-member">
+                        <div className="image">
+                            <img src={StaffImage2} alt=""/>
                         </div>
-                        <div>
-                        <h4>Ergonomic Chair</h4>
-                        <p>Nous maîtrisons les meilleurs process et les meilleures stratégies des tops du domaine</p>
-                            <Link to='/blog'>Read more</Link>
+                        <div className="infos">
+                            <div className="staff-member__name">MARK HERNERITIX</div>
+                            <div className="staff-member__experience">10 YEARS EXPERIENCE</div>
+                        </div>
+                        <div className="media">
+                            <Link to=""><span className="bi bi-facebook"></span></Link>
+                            <Link to=""><span className="bi bi-twitter"></span></Link>
+                            <Link to=""><span className="bi bi-pinterest"></span></Link>
+                            <Link to=""><span className="bi bi-linkedin"></span></Link>
+                        </div>
+                    </div>
+                    <div className="staff-member">
+                        <div className="image">
+                            <img src={StaffImage3} alt=""/>
+                        </div>
+                        <div className="infos">
+                            <div className="staff-member__name">PETER SIA</div>
+                            <div className="staff-member__experience">12 YEARS EXPERIENCE</div>
+                        </div>
+                        <div className="media">
+                            <Link to=""><span className="bi bi-facebook"></span></Link>
+                            <Link to=""><span className="bi bi-twitter"></span></Link>
+                            <Link to=""><span className="bi bi-pinterest"></span></Link>
+                            <Link to=""><span className="bi bi-linkedin"></span></Link>
                         </div>
                     </div>
                 </div>
-            </div>*/}
+            </div>
         </HomeContainer>
     )
 }
