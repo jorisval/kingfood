@@ -6,72 +6,105 @@ import { CatalogContainer, SkeletonLoader } from "../styles/Catalog";
 
 function Catalog() {
     const { setActivePage } = useContext(HeaderContext);
-    const [activeProduct, setActiveProduct] = useState(0);
+    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
+    const [catalogViewData, setCatalogViewData] = useState([]);
+    const [selectedCategoryData, setSelectedCategoryData] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("ALL CATEGORIES");
+    const categories = [
+        "ALL CATEGORIES",
+        "BURGER",
+        "PIZZA",
+        "BLUEBERRY SHAKE",
+        "CHIKKEN COUP",
+        "ICE CREAM",
+        "DRUNK"
+    ];
 
-    const handleMouseEnter = (index) => {
-        setActiveProduct(index);
-    };
+    const[showCount, setShowCount] = useState(6);
+    const handleClick = () => {
+        setShowCount(showCount + 6);
+    }
+    
+    useEffect(() => {
+    if (data && Array.isArray(data) && data.length > 0) {
+            if (selectedCategory === "ALL CATEGORIES") {
+            setCatalogViewData(data.slice(0, showCount));
+            setSelectedCategoryData(data)
+        } else {
+            const filteredData = data.filter(product => product.category === selectedCategory);
+            setSelectedCategoryData(filteredData);
+            setCatalogViewData(filteredData.slice(0, showCount));
+        }
+    }
+    }, [data, selectedCategory, showCount]);
+
 
     useEffect(() => {
         setActivePage("catalog");
     }, [setActivePage]);
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
-    const[showCount, setShowCount] = useState(8);
-    const handleClick = () => {
-        setShowCount(showCount + 8);
-    }
-    /*const [currentPage, setCurrentPage] = useState(1);
-    const [perPage] = useState(12);
-    const indexOfLastProduct = currentPage * perPage;
-    const indexOfFirstProduct = indexOfLastProduct - perPage;
-    const currentProducts = data?.slice(indexOfFirstProduct, indexOfLastProduct);
-    const pageNumber = [];
-
-    for(let i=1; i <= Math.ceil(data?.length / perPage); i++) {
-        pageNumber.push(i);
-    }
-
-    const handleClick = (event) => {
-        setCurrentPage(event.target.id)
-    }*/
+    
 
     return(
         <CatalogContainer className="catalog">
-            <div className="pages-title">
-            <h1>Catalog<span className="bi bi-chevron-double-right"></span></h1>
-        </div>
-        <div className="services-section catalog-services">
-            <div className="services">
-                {dataIsLoading
-                    ? Array.from({ length: showCount }).map((_, i) => <SkeletonLoader key={i} />)
-                    : Array.isArray(data) &&
-                        data.slice(0, showCount).map((product) => {
-                            return(
-                                <div className="service" 
-                                key={product._id}
-                                onMouseEnter={() => handleMouseEnter(product._id)}
-                                >
-                                    <Link to={`/product/${product._id}`}>
-                                        <div className="service__content">
-                                            <img src={product.images[0]} alt=""/>
-                                            <p>{product.name}</p>
-                                            <span>${product.price}</span>
-                                        </div>
-                                        <div className={`service__background ${
-                                            activeProduct === product._id ? "active" : ""
-                                        }`}>
-                                            <span className="add-product">+</span>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                }
+            <div className="services-section__header">
+                <p className="subtitle">Choose and Try</p>
+                <h2>FROM OUR MENU</h2>
+                <div className="category-buttons">
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            className={`cta-button ${selectedCategory === category ? "active" : ""}`}
+                            onClick={() => {setSelectedCategory(category); setShowCount(6)}}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
             </div>
-            {showCount < data?.length && (
-                <button className="cta-button" onClick={handleClick}>Show More</button>
-            )}
-        </div>
+            <div className="services-section catalog-services">
+                <div className="services">
+                    {dataIsLoading
+                        ? Array.from({ length: showCount }).map((_, i) => <SkeletonLoader key={i} />)
+                        : catalogViewData.length > 0 ? (catalogViewData.map((product, index) => {
+                                return(
+                                    <div className="service" 
+                                    key={index}
+                                    >
+                                        <Link to={`/product/${product._id}`}>
+                                            <div className="service__content">
+                                                <img src={product.images[0]} alt=""/>
+                                                <div className="part-one">
+                                                    <p>{product.category}</p>
+                                                    <div className="star-icons">
+                                                        {Array.from({ length: 5 }).map((_, i) => {
+                                                            const starIndex = i + 1;
+                                                            return (
+                                                            <span 
+                                                                key={starIndex} 
+                                                                className={`bi bi-star${product.averageRating >= starIndex ? '-fill' : product.averageRating >= starIndex - 0.5 ? '-half' : ''}`}
+                                                            >
+                                                            </span>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                                <p>{product.name}</p>
+                                                <span>PRICE  <span className="initial-price">${product.price}</span> ${product.discountedPrice}</span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                )
+                        })) : (
+                            <div className="not-found">
+                                <h3>No menu available right now in the selected category!</h3>
+                            </div>
+                        )
+                    }
+                </div>
+                {showCount < selectedCategoryData?.length && (
+                    <button className="cta-button" onClick={handleClick}>Show More</button>
+                )}
+            </div>
         </CatalogContainer>
     );
 }

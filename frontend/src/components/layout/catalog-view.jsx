@@ -59,11 +59,16 @@ function CatalogView() {
                                         <div className="part-one">
                                             <p>{product.category}</p>
                                             <div className="star-icons">
-                                                <span className="bi bi-star"></span>
-                                                <span className="bi bi-star"></span>
-                                                <span className="bi bi-star"></span>
-                                                <span className="bi bi-star"></span>
-                                                <span className="bi bi-star"></span>
+                                                {Array.from({ length: 5 }).map((_, i) => {
+                                                    const starIndex = i + 1;
+                                                    return (
+                                                    <span 
+                                                        key={starIndex} 
+                                                        className={`bi bi-star${product.averageRating >= starIndex ? '-fill' : product.averageRating >= starIndex - 0.5 ? '-half' : ''}`}
+                                                    >
+                                                    </span>
+                                                    );
+                                                })}
                                             </div>
                                         </div>
                                         <p>{product.name}</p>
@@ -75,7 +80,8 @@ function CatalogView() {
                     })) : (
                         <div className="not-found">
                             <h3>No menu available right now in the selected category!</h3>
-                        </div>                    )
+                        </div>
+                    )
                 }
             </div>
             <Link to='/catalog' className="cta-button">SEE ALL PRODUCTS</Link>
