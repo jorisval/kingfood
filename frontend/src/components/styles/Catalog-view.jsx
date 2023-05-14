@@ -59,17 +59,25 @@ export const CatalogViewContainer = styled.div`
         }
         .category-buttons {
             display: flex;
-            justify-content: center;
-            overflow: hidden;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+            
+            &::-webkit-scrollbar { /* Chrome, Safari, Edge */
+                display: none;
+            }
+
             .cta-button {
+                flex: 0 0 auto;
                 background-color: ${theme.colors.white};
                 border-radius: 10px;
                 box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
                 color: ${theme.colors.titleH2};
                 margin-right: 0.625rem;
                 &.active {
-                    background-color: ${theme.colors.white};
-                    color: ${theme.colors.titleH2};
+                    background-color: ${theme.colors.secondary};
+                    color: ${theme.colors.white};
                 }
             }
         }
@@ -144,6 +152,11 @@ export const CatalogViewContainer = styled.div`
                     margin: 0 0.375rem;
                 }
             }
+        }
+        .not-found {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 2.1875rem;
         }
     }
     a {

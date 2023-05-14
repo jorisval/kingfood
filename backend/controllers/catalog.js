@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Option = require('../models/Option');
+const Review = require('../models/Review');
 const fs = require('fs');
 
 exports.createProduct = (req, res, next) => {
@@ -157,9 +158,23 @@ exports.deleteOption = (req, res) => {
 };
 
 
-exports.getAllProducts = (req, res, next) => {
-    Product.find()
-    .populate('options')
-    .then(products => res.status(200).json(products))
-    .catch(error => res.status(400).json({ error }));
+exports.getAllProducts = async (req, res, next) => {
+    try {
+        let products = await Product.find().populate('options').lean();
+
+        // calculate the average rating for each product and create averageRating property to each of them
+        for (let product of products) {
+            let reviews = await Review.find({ product: product._id });
+            if (reviews.length > 0) {
+                let totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+                product.averageRating = totalRating / reviews.length;
+            } else {
+                product.averageRating = 0;
+            }
+        }
+        
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(400).json({ error });
+    }
 };

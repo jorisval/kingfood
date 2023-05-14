@@ -5,13 +5,28 @@ import { CatalogViewContainer, SkeletonLoader } from "../styles/Catalog-view";
 function CatalogView() {
     const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
     const [catalogViewData, setCatalogViewData] = useState([]);
-
-
+    const [selectedCategory, setSelectedCategory] = useState("ALL CATEGORIES");
+    const categories = [
+        "ALL CATEGORIES",
+        "BURGER",
+        "PIZZA",
+        "BLUEBERRY SHAKE",
+        "CHIKKEN COUP",
+        "ICE CREAM",
+        "DRUNK"
+    ];
+    
     useEffect(() => {
-        if (data && Array.isArray(data) && data.length > 0) {
-        setCatalogViewData(data.slice(0, 3));
+    if (data && Array.isArray(data) && data.length > 0) {
+            if (selectedCategory === "ALL CATEGORIES") {
+            setCatalogViewData(data.slice(0, 3));
+        } else {
+            const filteredData = data.filter(product => product.category === selectedCategory);
+            setCatalogViewData(filteredData.slice(0, 3));
         }
-    }, [data]);
+    }
+    }, [data, selectedCategory]);
+    
 
     return (
         <CatalogViewContainer className="services-section">
@@ -19,19 +34,21 @@ function CatalogView() {
                 <p className="subtitle">Choose and Try</p>
                 <h2>FROM OUR MENU</h2>
                 <div className="category-buttons">
-                    <button className="cta-button">ALL CATEGORIES</button>
-                    <button className="cta-button">BURGER</button>
-                    <button className="cta-button">PIZZA</button>
-                    <button className="cta-button">BLUEBERRY SHAKE</button>
-                    <button className="cta-button">CHIKKEN COUP</button>
-                    <button className="cta-button">ICE CREAM</button>
-                    <button className="cta-button">DRUNK</button>
+                    {categories.map(category => (
+                        <button
+                            key={category}
+                            className={`cta-button ${selectedCategory === category ? "active" : ""}`}
+                            onClick={() => setSelectedCategory(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
                 </div>
             </div>
             <div className="services">
                 { dataIsLoading ? 
                     Array.from({ length : 3 }).map((_, i) => <SkeletonLoader key={i} />)
-                    : (catalogViewData.map((product, index) => {
+                    : catalogViewData.length > 0 ? (catalogViewData.map((product, index) => {
                         return(
                             <div className="service" 
                             key={index}
@@ -55,7 +72,10 @@ function CatalogView() {
                                 </Link>
                             </div>
                         )
-                    }))
+                    })) : (
+                        <div className="not-found">
+                            <h3>No menu available right now in the selected category!</h3>
+                        </div>                    )
                 }
             </div>
             <Link to='/catalog' className="cta-button">SEE ALL PRODUCTS</Link>
