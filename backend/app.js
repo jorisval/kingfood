@@ -7,6 +7,8 @@ const adminRoutes = require('./routes/admin');
 const contactRoutes = require('./routes/contact');
 const newsletterRoutes = require('./routes/newsletter');
 const orderRoutes = require('./routes/order');
+const bookingRoutes = require('./routes/booking');
+
 const path = require('path');
 
 mongoose.connect('mongodb+srv://jorisawoui:kingfooddata007@kingfood-db.m070kar.mongodb.net/?retryWrites=true&w=majority',
@@ -17,7 +19,7 @@ mongoose.connect('mongodb+srv://jorisawoui:kingfooddata007@kingfood-db.m070kar.m
 
 // Middleware for parsing JSON and URL-encoded form data
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,6 +34,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/order', orderRoutes);
+app.use('/api/booking', bookingRoutes);
 
 
 app.use('/images/', express.static(path.join(__dirname, 'images')));

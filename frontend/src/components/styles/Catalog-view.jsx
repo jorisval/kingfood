@@ -60,7 +60,7 @@ export const CatalogViewContainer = styled.div`
         .category-buttons {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
+            overflow: hidden;
             .cta-button {
                 background-color: ${theme.colors.white};
                 border-radius: 10px;

@@ -44,7 +44,7 @@ function Contact() {
     const handleCloseThankYouPopup = () => {
         setShowThankYouPopup(false);
         navigate('/contact');
-      };
+    };
 
     return(
         <ContactContainer className="contact">

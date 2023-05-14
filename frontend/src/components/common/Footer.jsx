@@ -25,7 +25,20 @@ function Footer() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-      
+        /*
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch("http://localhost:3000/api/newsletter", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+        ...
+        */
         const formData = new FormData(event.target);
         const searchParams = new URLSearchParams();
       

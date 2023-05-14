@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CatalogView from "../layout/catalog-view";
+import ThankYouPopup from "./Thank-you-booking";
 import { HeaderContext } from "../utils/context";
 import Hero from "../../assets/images/k-hero-image.png";
 import CustomerImage1 from "../../assets/images/customer-image.png";
@@ -20,6 +21,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
     const { setActivePage } = useContext(HeaderContext);
+    const [showThankYouPopup, setShowThankYouPopup] = useState(false);
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -29,7 +31,36 @@ function Home() {
     }, [setActivePage]);
     async function handleBookingSubmit(event) {
         event.preventDefault();
+        const formData = new FormData(event.target);
+        const searchParams = new URLSearchParams();
+      
+        for (const [key, value] of formData.entries()) {
+          searchParams.append(key, value);
+        }
+      
+        try {
+            await fetch("http://localhost:3000/api/booking/", {
+                method: "POST",
+                body: searchParams,
+                headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                },
+            });
+
+            // Reset the form
+            event.target.reset();
+            
+            //Redirect to the home page
+            setShowThankYouPopup(true);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     }
+
+    const handleCloseThankYouPopup = () => {
+        setShowThankYouPopup(false);
+    };
+
     return(
         <HomeContainer className="home">
             <div className="hero">
@@ -124,6 +155,9 @@ function Home() {
                     </div>
                 </div>
             </div>
+            {showThankYouPopup && (
+                <ThankYouPopup onClose={handleCloseThankYouPopup} />
+            )}
             <div className="staff">
                 <div className="staff-header">
                     <div className="staff-header__part1">

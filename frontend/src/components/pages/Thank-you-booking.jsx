@@ -15,7 +15,6 @@ const PopupOverlay = styled.div`
 `;
 
 const PopupContent = styled.div`
-  color: #000000;
   position: relative;
   background-color: #ffffff;
   border-radius: 10px;
@@ -44,9 +43,8 @@ const ThankYouPopup = ({ onClose }) => {
         <PopupOverlay onClick={onClose}>
           <PopupContent onClick={(e) => e.stopPropagation()}>
               <CloseButton onClick={onClose}>&times;</CloseButton>
-              <ThankYouTitle>Great !</ThankYouTitle>
-              <p>Your welcome offer is in your box!</p>
-              <p>We will keep you informed of all our news.</p>
+              <ThankYouTitle>Thank you for booking!</ThankYouTitle>
+              <p>We will answer you as soon as possible!</p>
           </PopupContent>
         </PopupOverlay>
     );
