@@ -130,8 +130,8 @@ export const BlogContainer = styled.div`
             color: ${theme.colors.white};
             width: 5.625rem;
             padding: 0.375rem 1.75rem;
-            background-color: ${theme.colors.button};
-            border-radius: 2rem 0 0 2rem;
+            background-color: ${theme.colors.link};
+            border-radius: 5px 0 0 5px;
             border-style: none;
             display: inline-block;
             margin-bottom: ${theme.layout.spaceBetween30};
@@ -151,8 +151,8 @@ export const BlogContainer = styled.div`
             color: ${theme.colors.white};
             width: 5.625rem;
             padding: 0.375rem 1.75rem;
-            background-color: ${theme.colors.button};
-            border-radius: 0 2rem 2rem 0;
+            background-color: ${theme.colors.link};
+            border-radius: 0 5px 5px 0;
             border-style: none;
             display: inline-block;
             margin-bottom: ${theme.layout.spaceBetween30};
