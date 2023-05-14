@@ -115,7 +115,7 @@ function Product() {
                         </div>
                         <div className="product-hero__part-2">
                             <div className="product-title">
-                                <h2>{data.name}</h2>
+                                <h2>{data.category} / {data.name}</h2>
                                 <span>${data.price}</span>
                             </div>
                             { data.options && data.options.map((option, index) => {

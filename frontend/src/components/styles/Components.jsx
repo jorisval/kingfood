@@ -15,7 +15,7 @@ const ComponentsStyle = createGlobalStyle`
         cursor: pointer;
         @media (min-width: ${theme.breakpoints.up.medium}) {
             font-size: 1.125rem;
-            padding: 1.25rem 1.75rem;
+            padding: 0.625rem 1.75rem;
         }
     }
 
@@ -43,7 +43,7 @@ const ComponentsStyle = createGlobalStyle`
         font-size: 1rem;
         color: ${theme.colors.white};
         padding: 0.625rem 1.75rem;
-        background-color: ${theme.colors.primary};
+        background-color: ${theme.colors.link};
         border-radius: 5px;
         border-style: none;
         display: inline-block;
