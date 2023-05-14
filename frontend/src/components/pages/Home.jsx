@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import CatalogView from "../layout/catalog-view";
 import ThankYouPopup from "./Thank-you-booking";
 import { HeaderContext } from "../utils/context";
@@ -26,6 +26,56 @@ function Home() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const currentTime = `${hours}:${minutes}`;
+
+    const [activeReview, setActiveReview] = useState(0);
+    const reviewRef = useRef();
+    const reviewsData = [
+        {
+            name: "RONALD D. MORGAN",
+            post: "FOUCHETTE & CO",
+            image: CustomerImage1,
+            comment: "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi."
+        },
+        {
+            name: "JEAN D. CLAUDE",
+            post: "CHIVI & CO",
+            image: CustomerImage1,
+            comment: "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi."
+        },
+        {
+            name: "ALEX TARGARIAN",
+            post: "THRONE & CO",
+            image: CustomerImage1,
+            comment: "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi."
+        },
+        {
+            name: "SAHAD DANARIAS",
+            post: "TESLA INC.",
+            image: CustomerImage1,
+            comment: "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi."
+        }
+    ]
+    
+    const handleReviewScroll = (direction) => {
+        if (direction === 'left') {
+            reviewRef.current.scrollLeft -= reviewRef.current.offsetWidth;
+            if (activeReview > 0) {
+                setActiveReview(activeReview - 1);
+            }
+        } else {
+            reviewRef.current.scrollLeft += reviewRef.current.offsetWidth;
+            if   (activeReview < reviewsData.length - 1) {
+                setActiveReview(activeReview + 1);
+            }
+        }
+    };
+
+    const handleReviewCircleClick = (index) => {
+        setActiveReview(index);
+        reviewRef.current.scrollLeft = index * reviewRef.current.offsetWidth;
+    };
+
+
     useEffect(() => {
         setActivePage('home');
     }, [setActivePage]);
@@ -83,49 +133,26 @@ function Home() {
                         <img src={Coma} alt=""/>
                         <img src={Coma} alt=""/>
                     </div>
-                    <div className="Customer-reviews">
-                        <div className="Customer-review active">
-                            <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
-                            <img src={CustomerImage1} alt="" className="Customer-review__image"/>
-                            <div className="Customer-review__name">RONALD D. MORGAN</div>
-                            <div className="Customer-review__post">FOUCHETTE & CO</div>
-                        </div>
-                        <div className="Customer-review">
-                            <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
-                            <img src={CustomerImage1} alt="" className="Customer-review__image"/>
-                            <div className="Customer-review__name">JEAN D. CLAUDE</div>
-                            <div className="Customer-review__post">CHIVI & CO</div>
-                        </div>
-                        <div className="Customer-review">
-                            <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
-                            <img src={CustomerImage1} alt="" className="Customer-review__image"/>
-                            <div className="Customer-review__name">ALEX TARGARIAN</div>
-                            <div className="Customer-review__post">THRONE & CO</div>
-                        </div>
-                        <div className="Customer-review">
-                            <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
-                            <img src={CustomerImage1} alt="" className="Customer-review__image"/>
-                            <div className="Customer-review__name">SAHAD DANARIAS</div>
-                            <div className="Customer-review__post">TESLA INC.</div>
-                        </div>
+                    <div className="Customer-reviews" ref={reviewRef}>
+                        <span className="bi bi-chevron-left" onClick={() => handleReviewScroll('left')}></span>
+                        {reviewsData.map((review, index) => (
+                            <div className={`Customer-review ${index === activeReview ? 'active' : ''}`} key={index}>
+                                <p>{review.comment}</p>
+                                <img src={review.image} alt="" className="Customer-review__image"/>
+                                <div className="Customer-review__name">{review.name}</div>
+                                <div className="Customer-review__post">{review.post}</div>
+                            </div>
+                        ))}
+                        <span className="bi bi-chevron-right" onClick={() => handleReviewScroll('right')}></span>
                     </div>
                     <div className="review-circles">
-                        <div 
-                            className="review-circle active"
-                        >
-                        </div>
-                        <div 
-                            className="review-circle"
-                        >
-                        </div>
-                        <div 
-                            className="review-circle"
-                        >
-                        </div>
-                        <div 
-                            className="review-circle"
-                        >
-                        </div>
+                        {reviewsData.map((_, index) => (
+                            <div
+                                className={`review-circle ${index === activeReview ? 'active' : ''}`}
+                                onClick={() => handleReviewCircleClick(index)}
+                                key={index}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

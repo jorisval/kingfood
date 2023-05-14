@@ -157,9 +157,29 @@ animation: ${fadeIn} 1s ease-in;
             &-reviews {
                 width: 70%;
                 margin: auto;
+                position: relative;
+                .bi-chevron-left {
+                    position: absolute;
+                    left: -2.5rem;
+                    top: 45%;
+                    color: ${theme.colors.paragraph};
+                    font-size: 2rem;
+                    cursor: pointer;
+                    z-index: 12;
+                }
+                .bi-chevron-right {
+                    position: absolute;
+                    right: -2.5rem;
+                    top: 45%;
+                    color: ${theme.colors.paragraph};
+                    font-size: 2rem;
+                    cursor: pointer;
+                    z-index: 12;
+                }
             }
             &-review {
                 display: none;
+                z-index: 11;
                 animation: ${fadeIn} 0.5s ease-in;
                 margin-bottom: ${theme.layout.spaceBetween30};
                 p {
@@ -201,7 +221,7 @@ animation: ${fadeIn} 1s ease-in;
                 border-radius: 50%;
                 background-color: ${theme.colors.paragraph};
                 margin-right: 4px;
-
+                cursor: pointer;
                 &.active {
                     background-color: ${theme.colors.secondary};
                 }
