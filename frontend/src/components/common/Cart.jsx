@@ -181,7 +181,7 @@ function Cart() {
                     </div>
                     <div className="cart-content-product__part2">
                         <div className="cart-content-product__part2-title">
-                            <span>{item.name}</span>
+                            <span>{item.category} / {item.name}</span>
                             <span className="bi bi-x" onClick={() => removeItem(itemIndex, orderInfos.orderItems[index].option)}></span>
                         </div>
                         {orderInfos.orderItems[itemIndex].option && (

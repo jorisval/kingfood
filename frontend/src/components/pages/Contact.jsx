@@ -48,9 +48,6 @@ function Contact() {
 
     return(
         <ContactContainer className="contact">
-            <div className="pages-title">
-                <h1>Contact us<span className="bi bi-chevron-double-right"></span></h1>
-            </div>
             <div className="contact-form">
                 <form onSubmit={handleSubmit}>
                     <div><input type="text" name="name" id="name" placeholder="Name"/></div>

@@ -125,17 +125,13 @@ export const StyledButton = styled.button`
     font-size: 0.875rem;
     font-weight: 400;
     color: ${theme.colors.white};
-    padding: 0.375rem 1.625rem;
-    background-color: ${theme.colors.primary};
-    border: 1px solid ${theme.colors.primary};
-    border-radius: 2rem;
+    padding: 0.625rem 1.75rem;
+    background-color: ${theme.colors.link};
+    border: 1px solid ${theme.colors.link};
+    border-radius: 5px;
     cursor: pointer;
     margin-top: ${theme.layout.spaceBetween20};
     transition: background-color 0.2s ease-in-out;
-
-    &:hover {
-        background-color: ${theme.colors.link};
-    }
 `;
 
 export const StyledRadioWrapper = styled.div`

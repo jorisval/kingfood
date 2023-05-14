@@ -12,35 +12,14 @@ const fadeIn = keyframes`
 
 export const ContactContainer = styled.div`
     animation: ${fadeIn} 1s ease-in;
-    .pages-title {
-        padding: ${theme.layout.spaceBetween30} ${theme.layout.marginLeftRight};
-        padding-bottom: ${theme.layout.spaceBetween10};
-        @media (min-width: ${theme.breakpoints.up.medium}) {
-            padding: ${theme.layout.spaceBetween60} ${theme.layout.marginLeftRight};
-            padding-bottom: ${theme.layout.spaceBetween10};
-        }
-        h1 {
-            color: ${theme.colors.titleH1};
-            font-size: 1.25rem;
-            font-weight: 800;
-            @media (min-width: ${theme.breakpoints.up.medium}) {
-                font-size: 1.75rem;
-            }
-            .bi-chevron-double-right {
-                font-size: 1rem;
-                @media (min-width: ${theme.breakpoints.up.medium}) {
-                    font-size: 1.375rem;
-                }
-            }
-        }
-    }
     .contact-form {
         margin: auto;
-        margin-top: ${theme.layout.spaceBetween30};
+        margin-top: ${theme.layout.spaceBetween60};
         margin-bottom: ${theme.layout.spaceBetween30};
         width: 80%;
         @media (min-width: ${theme.breakpoints.up.medium}) {
             width: 50%;
+            margin-top: ${theme.layout.spaceBetween90};
         }
         form {
             display: flex;
@@ -88,9 +67,9 @@ export const ContactContainer = styled.div`
                 font-weight: 400;
                 color: ${theme.colors.white};
                 padding: 0.375rem 1.625rem;
-                background-color: ${theme.colors.button};
+                background-color: ${theme.colors.link};
                 width: unset;
-                border-radius: 2rem;
+                border-radius: 5px;
                 border-style: none;
                 display: inline-block;
                 cursor: pointer;
