@@ -12,5 +12,7 @@ const productSchema = new mongoose.Schema({
   stock: { type: Number, default: 0 }
 });
 
+productSchema.index({name: 'text', description: 'text'});
+
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

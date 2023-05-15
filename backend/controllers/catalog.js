@@ -178,3 +178,22 @@ exports.getAllProducts = async (req, res, next) => {
         res.status(400).json({ error });
     }
 };
+
+exports.searchProducts = (req, res) => {
+    const query = req.query.q;  // assuming 'q' is the query parameter for the search string
+
+    if (!query) {
+        return res.status(400).json({ error: 'Missing query parameter' });
+    }
+
+    // Perform a text search
+    Product.find({ $text: { $search: query } })
+        .populate('options')
+        .then(products => {
+            res.status(200).json(products);
+        })
+        .catch(error => {
+            console.error('Error during search:', error);
+            res.status(500).json({ error });
+        });
+};

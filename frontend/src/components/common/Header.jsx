@@ -3,7 +3,7 @@ import { useContext } from "react";
 import MenuMd from "./Menu-md";
 import ColoredLogo from "../../assets/images/kingfood-logo.png";
 import NavLg from "./Nav-lg";
-import Search from "./Seach";
+import Search from "./Search";
 import Cart from "./Cart";
 import Favorite from "./Favorite";
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useContext, useState ,useEffect } from "react";
-import { FavoriteSkeletonLoader } from "../styles/Layouts";
+import { ItemSkeletonLoader } from "../styles/Layouts";
 function Favorite() {
     const { favoriteItemIds, setFavoriteItemIds } = useContext(HeaderContext);
     const [products, setProducts] = useState([]);
@@ -41,7 +41,7 @@ function Favorite() {
     
     const favoriteList = 
         <div className="favorite-content__products">
-            {isLoading ? (Array.from({ length : 2 }).map((_, i) => <FavoriteSkeletonLoader key={i} />)
+            {isLoading ? (Array.from({ length : 2 }).map((_, i) => <ItemSkeletonLoader key={i} />)
             ) : (
                 products.map((item, index) => {
                     return(
@@ -76,7 +76,7 @@ function Favorite() {
                     )
                 })
             )}
-        </div>
+        </div>;
 
     return (
         <div className="favorite">
