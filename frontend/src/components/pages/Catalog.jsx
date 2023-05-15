@@ -5,7 +5,7 @@ import { useFetch } from "../utils/hooks";
 import { CatalogContainer, SkeletonLoader } from "../styles/Catalog";
 
 function Catalog() {
-    const { setActivePage } = useContext(HeaderContext);
+    const { setActivePage, favoriteItemIds, setFavoriteItemIds  } = useContext(HeaderContext);
     const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
     const [catalogViewData, setCatalogViewData] = useState([]);
     const [selectedCategoryData, setSelectedCategoryData] = useState([]);
@@ -43,6 +43,15 @@ function Catalog() {
         setActivePage("catalog");
     }, [setActivePage]);
     
+    const handleAddFavoriteClick = (itemId) => {
+        if (favoriteItemIds.includes(itemId)) {
+            // Remove itemId from array
+            setFavoriteItemIds(favoriteItemIds.filter(id => id !== itemId));
+        } else {
+            // Add itemId to array
+            setFavoriteItemIds([...favoriteItemIds, itemId]);
+        }
+    };
 
     return(
         <CatalogContainer className="catalog">
@@ -70,6 +79,9 @@ function Catalog() {
                                     <div className="service" 
                                     key={index}
                                     >
+                                        <div className="add-favorite" onClick={() => handleAddFavoriteClick(product._id)}>
+                                            <span className={`bi ${favoriteItemIds.includes(product._id) ? 'bi-heart-fill' : 'bi-heart'}`}></span>
+                                        </div>
                                         <Link to={`/product/${product._id}`}>
                                             <div className="service__content">
                                                 <img src={product.images[0]} alt=""/>

@@ -128,6 +128,44 @@ export const CatalogContainer = styled.div`
                     width: 16rem;
                     padding: 1.875rem 1.5625rem;
                 }
+                .add-favorite {
+                    position absolute;
+                    z-index: 13;
+                    right: 0.625rem;
+                    top: 0.625rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: ${theme.colors.white};
+                    width: 25px;
+                    height: 25px;
+                    border: 1px solid ${theme.colors.white};
+                    border-radius: 50%;
+                    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+                    margin-right: 0.5rem;
+                    cursor: pointer;
+                    @media (min-width: ${theme.breakpoints.up.medium}) {
+                        width: 30px;
+                        height: 30px;
+                        right: 1rem;
+                        top: 1rem;
+                    }
+    
+                    .bi-heart {
+                        font-size: 1rem;
+                        color: ${theme.colors.primary};
+                        @media (min-width: ${theme.breakpoints.up.xlarge}) {
+                        font-size: 1.125rem;
+                        }
+                    }
+                    .bi-heart-fill {
+                        font-size: 1rem;
+                        color: ${theme.colors.secondary};
+                        @media (min-width: ${theme.breakpoints.up.xlarge}) {
+                        font-size: 1.125rem;
+                        }
+                    }
+                }
                 a {
                     text-decoration: none;
                 }

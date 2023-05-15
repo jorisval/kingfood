@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../utils/hooks";
 import { CatalogViewContainer, SkeletonLoader } from "../styles/Catalog-view";
+import { HeaderContext } from "../utils/context";
+
 function CatalogView() {
+    const { favoriteItemIds, setFavoriteItemIds } = useContext(HeaderContext);
     const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
     const [catalogViewData, setCatalogViewData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("ALL CATEGORIES");
@@ -27,6 +30,15 @@ function CatalogView() {
     }
     }, [data, selectedCategory]);
     
+    const handleAddFavoriteClick = (itemId) => {
+        if (favoriteItemIds.includes(itemId)) {
+            // Remove itemId from array
+            setFavoriteItemIds(favoriteItemIds.filter(id => id !== itemId));
+        } else {
+            // Add itemId to array
+            setFavoriteItemIds([...favoriteItemIds, itemId]);
+        }
+    };
 
     return (
         <CatalogViewContainer className="services-section">
@@ -52,7 +64,9 @@ function CatalogView() {
                         return(
                             <div className="service" 
                             key={index}
-                            >
+                            >   <div className="add-favorite" onClick={() => handleAddFavoriteClick(product._id)}>
+                                    <span className={`bi ${favoriteItemIds.includes(product._id) ? 'bi-heart-fill' : 'bi-heart'}`}></span>
+                                </div>
                                 <Link to={`/product/${product._id}`}>
                                     <div className="service__content">
                                         <img src={product.images[0]} alt=""/>
