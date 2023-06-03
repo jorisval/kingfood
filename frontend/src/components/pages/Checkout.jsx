@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import {
   CheckoutContainer,
   FormTitle,
@@ -16,12 +18,21 @@ import {
 } from '../styles/Checkout';
 import { CartContext } from '../utils/context/index';
 import { useNavigate } from 'react-router-dom';
+require('dotenv').config();
 
 const Checkout = () => {
     const { orderInfos, setOrderInfos, setOrderPlaced } = useContext(CartContext);
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [billingAddressOption, setBillingAddressOption] = useState('same');
     const navigate = useNavigate();
+    const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
+    const [error, setError] = useState(null);
+    const [processing, setProcessing] = useState(false);
+    const [paymentSucceeded, setPaymentSucceeded] = useState(false);
+    const stripe = useStripe();
+    const elements = useElements();
+
+
 
     const setCustomerInfo = (field, value) => {
         setOrderInfos({
@@ -68,30 +79,54 @@ const Checkout = () => {
       You can update the paymentAmount field once the payment is successfully processed, 
       either in the handleSubmit function or in a separate function that handles the payment process.
       */
-    
-      updatedOrderInfos.orderStatus = 'Pending';
-      updatedOrderInfos.paymentMethod = paymentMethod;
-      updatedOrderInfos.paymentStatus = 'Pending';
-      updatedOrderInfos.paymentAmount = orderInfos.totalAmount;
-    
-      try {
-        const response = await fetch('http://localhost:3000/api/order/', {
-          method: "POST",
-          body: JSON.stringify(updatedOrderInfos),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-    
-        const order = await response.json();
-        setOrderPlaced(order);
-    
-        // Reset the form
-        e.target.reset();
-      } catch (error) {
-        console.error("Error:", error);
+
+      if (!stripe || !elements) {
+        return;
       }
-      navigate('/thank-you');
+  
+      setError(null);
+      setProcessing(true);
+  
+      const cardElement = elements.getElement(CardElement);
+  
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      });
+  
+      if (error) {
+        setError(error.message);
+        setProcessing(false);
+      } else {
+        // Send the paymentMethod.id to your server for processing
+        // const response = await fetch('your_server_endpoint', { ... });
+        // Check the response status and handle success or error accordingly
+        updatedOrderInfos.orderStatus = 'Pending';
+        updatedOrderInfos.paymentMethod = paymentMethod;
+        updatedOrderInfos.paymentStatus = 'Pending';
+        updatedOrderInfos.paymentAmount = orderInfos.totalAmount;
+      
+        try {
+          const response = await fetch('http://localhost:3000/api/order/', {
+            method: "POST",
+            body: JSON.stringify(updatedOrderInfos),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+      
+          const order = await response.json();
+          setOrderPlaced(order);
+      
+          // Reset the form
+          e.target.reset();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+        setProcessing(false);
+        setPaymentSucceeded(true);
+        navigate('/thank-you');
+      }
     };
     
 
@@ -147,7 +182,14 @@ const Checkout = () => {
 
     const cardDetails = () => (
         <CardDetails>
-        <FormRow>
+          <Elements >
+            <CardElement />
+          </Elements>
+        </CardDetails>
+    );
+
+    /*
+      <FormRow>
             <FormGroup>
                 <StyledLabel htmlFor="cardNumber">Card number</StyledLabel>
                 <StyledInput type="text" id="cardNumber" />
@@ -161,11 +203,10 @@ const Checkout = () => {
                 <StyledInput type="text" id="securityCode" />
             </FormGroup>
         </FormRow>
-        </CardDetails>
-    );
+    */
 
     return (
-        <CheckoutContainer>
+        <CheckoutContainer stripe={stripePromise}>
             <form onSubmit={handleSubmit}>
                 <FormSection>
                 <FormTitle>Contact information</FormTitle>
@@ -249,8 +290,12 @@ const Checkout = () => {
                 <FormSeparator />
               </FormSection>
               <FormSection style={{border: 'unset'}}>
-                <StyledButton type="submit">Finalize order</StyledButton>
+                <StyledButton type="submit" disabled={!stripe || processing || paymentSucceeded}>
+                  {processing ? 'Processing...' : 'Finalize order'}
+                </StyledButton>
               </FormSection>
+              {error && <div>{error}</div>}
+              {paymentSucceeded && <div>Payment successful!</div>}
             </form>
             </CheckoutContainer>
     );
