@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { useFetch } from "../utils/hooks";
 import { CatalogViewContainer, SkeletonLoader } from "../styles/Catalog-view";
 import { HeaderContext } from "../utils/context";
+import { BASE_URL } from '../../config';
 
 function CatalogView() {
     const { favoriteItemIds, setFavoriteItemIds } = useContext(HeaderContext);
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/catalog`);
     const [catalogViewData, setCatalogViewData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("ALL CATEGORIES");
     const categories = [

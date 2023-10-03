@@ -3,6 +3,7 @@ import { useState } from "react";
 import { HeaderContext } from "../utils/context";
 import { Link } from "react-router-dom";
 import { ItemSkeletonLoader } from "../styles/Layouts";
+import { BASE_URL } from '../../config';
 
 function Search() {
     const { favoriteItemIds, setFavoriteItemIds } = useContext(HeaderContext);
@@ -21,7 +22,7 @@ function Search() {
         event.preventDefault();
         setIsloading(true);
         const searchText = event.target.query.value;
-        const response = await fetch(`http://localhost:3000/api/catalog/search?q=${searchText}`);
+        const response = await fetch(`${BASE_URL}/api/catalog/search?q=${searchText}`);
         const products = await response.json();
         setSearchResults(products);
         setIsloading(false);

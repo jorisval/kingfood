@@ -3,10 +3,11 @@ import Logo from "../../assets/images/kingfood-logo-white.png";
 import ThankYouPopup from "../pages/Thank-you-newsletter";
 import { useFetch } from "../utils/hooks";
 import { Link } from "react-router-dom";
+import { BASE_URL } from '../../config';
 
 function Footer() {
     const [showThankYouPopup, setShowThankYouPopup] = useState(false);
-    const { data } = useFetch('http://localhost:3000/api/post');
+    const { data } = useFetch(`${BASE_URL}/api/post`);
     const posts = Array.isArray(data) && data?.slice(0, 2);
 
     const formatedDate = (isoDate) => {
@@ -30,7 +31,7 @@ function Footer() {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch("http://localhost:3000/api/newsletter", {
+            const response = await fetch("${BASE_URL}/api/newsletter", {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
@@ -47,7 +48,7 @@ function Footer() {
         }
     
         try {
-            const response = await fetch("http://localhost:3000/api/newsletter", {
+            const response = await fetch(`${BASE_URL}/api/newsletter`, {
                 method: "POST",
                 body: searchParams,
                 headers: {

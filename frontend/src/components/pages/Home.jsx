@@ -17,6 +17,7 @@ import Trust6 from "../../assets/images/trust-6.png";
 import Trust7 from "../../assets/images/trust-7.png";
 import { HomeContainer } from "../styles/Home";
 import { Link } from "react-router-dom";
+import { BASE_URL } from '../../config';
 
 
 function Home() {
@@ -89,7 +90,7 @@ function Home() {
         }
       
         try {
-            await fetch("http://localhost:3000/api/booking/", {
+            await fetch(`${BASE_URL}/api/booking/`, {
                 method: "POST",
                 body: searchParams,
                 headers: {

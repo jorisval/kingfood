@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 import { PostContainer, LoaderContainer } from "../styles/Artice";
+import { BASE_URL } from '../../config';
 
 function Article() {
     const { setActivePage } = useContext(HeaderContext);
@@ -10,7 +11,7 @@ function Article() {
         setActivePage("blog");
     }, [setActivePage]);
     const { articleId } = useParams();
-    const { data, dataIsLoading } = useFetch(`http://localhost:3000/api/post/${articleId}`);
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/post/${articleId}`);
     const formatedDate = (isoDate) => {
         // Create a new Date object from the ISO date string
         const date = new Date(isoDate);

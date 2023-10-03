@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useContext, useState ,useEffect } from "react";
 import { ItemSkeletonLoader } from "../styles/Layouts";
+import { BASE_URL } from '../../config';
 function Favorite() {
     const { favoriteItemIds, setFavoriteItemIds } = useContext(HeaderContext);
     const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ function Favorite() {
             setIsloading(true);
             const fetchProducts = async () => {
                 const requests = favoriteItemIds.map((id) =>
-                fetch(`http://localhost:3000/api/catalog/${id}`).then((res) => res.json())
+                fetch(`${BASE_URL}/api/catalog/${id}`).then((res) => res.json())
                 );
                 const products = await Promise.all(requests);
                 setProducts(products);

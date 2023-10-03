@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 import { BlogContainer, SkeletonLoader } from "../styles/Blog";
+import { BASE_URL } from '../../config';
 
 function Blog() {
     const { setActivePage } = useContext(HeaderContext);
     useEffect(() => {
         setActivePage("blog");
     }, [setActivePage]);
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/post');
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/post`);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage] = useState(8);
     const indexOfLastPost = currentPage * perPage;
