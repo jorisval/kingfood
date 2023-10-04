@@ -17,7 +17,9 @@ const allowedDomains = [
     'http://localhost:3001',
     'http://localhost:3001/',
     'https://kingfood.vercel.app/',
-    'https://kingfood.vercel.app'
+    'https://kingfood.vercel.app',
+    'https://kingfoods-ca9b88a5e72f.herokuapp.com/',
+    'https://kingfoods-ca9b88a5e72f.herokuapp.com'
 ];
   
 mongoose.set('strictQuery', true);
