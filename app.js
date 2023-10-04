@@ -23,7 +23,8 @@ const allowedDomains = [
     'http://kingfoods-ca9b88a5e72f.herokuapp.com/',
     'http://kingfoods-ca9b88a5e72f.herokuapp.com'
 ];
-  
+
+
 mongoose.set('strictQuery', true);
 mongoose.connect(
     process.env.MONGO_DB_ACCESS,
