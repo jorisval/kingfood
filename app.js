@@ -20,7 +20,6 @@ const allowedDomains = [
     'https://kingfood.vercel.app'
 ];
   
-
 mongoose.set('strictQuery', true);
 mongoose.connect(
     process.env.MONGO_DB_ACCESS,
@@ -34,7 +33,7 @@ mongoose.connect(
 
     app.use(cors({
         origin: function (origin, callback) {
-            console.log(origin);
+            console.log('request origin', origin);
             // Allow requests without origin (example, Postman requests)
             if (!origin) return callback(null, true);
             
