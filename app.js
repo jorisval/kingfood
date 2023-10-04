@@ -32,7 +32,16 @@ mongoose.connect(
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
     app.use(cors({
-        origin: true, 
+        origin: function (origin, callback) {
+            // Allow requests without origin (example, Postman requests)
+            if (!origin) return callback(null, true);
+            
+            if (allowedDomains.indexOf(origin) === -1) {
+                var msg = 'CORS policy of this site doesn\'t allow access from this origin';
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        }, 
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         credentials: true
     }));
