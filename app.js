@@ -15,9 +15,7 @@ const allowedDomains = [
     'http://localhost:3000',
     'http://localhost:3000/',
     'http://localhost:3001',
-    'http://localhost:3001/',
-    'https://kingfood.vercel.app/',
-    'https://kingfood.vercel.app'
+    'http://localhost:3001/'
 ];
   
 
@@ -34,7 +32,7 @@ mongoose.connect(
 
     app.use(cors({
         origin: function (origin, callback) {
-
+            console.log(origin);
             // Allow requests without origin (example, Postman requests)
             if (!origin) return callback(null, true);
             
