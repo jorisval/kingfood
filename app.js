@@ -19,7 +19,9 @@ const allowedDomains = [
     'https://kingfood.vercel.app/',
     'https://kingfood.vercel.app',
     'https://kingfoods-ca9b88a5e72f.herokuapp.com/',
-    'https://kingfoods-ca9b88a5e72f.herokuapp.com'
+    'https://kingfoods-ca9b88a5e72f.herokuapp.com',
+    'http://kingfoods-ca9b88a5e72f.herokuapp.com/',
+    'http://kingfoods-ca9b88a5e72f.herokuapp.com'
 ];
   
 mongoose.set('strictQuery', true);
