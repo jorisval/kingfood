@@ -15,7 +15,9 @@ const allowedDomains = [
     'http://localhost:3000',
     'http://localhost:3000/',
     'http://localhost:3001',
-    'http://localhost:3001/'
+    'http://localhost:3001/',
+    'https://kingfood.vercel.app/',
+    'https://kingfood.vercel.app'
 ];
   
 
